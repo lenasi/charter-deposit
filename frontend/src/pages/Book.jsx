@@ -127,7 +127,7 @@ export default function Book() {
           className={styles.testLink}
           onClick={() => setMode(mode === 'test' ? 'live' : 'test')}
         >
-          {mode === 'test' ? 'Exit test' : 'Test'}
+          {mode === 'test' ? 'Exit test' : 'Simulate Test Credit Card'}
         </button>
       </footer>
     </div>
