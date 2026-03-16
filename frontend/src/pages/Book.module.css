@@ -23,18 +23,10 @@
   justify-content: space-between;
 }
 
-.navLogo {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: #0a3f52;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.navLogoCruises {
-  color: #0d6e8a;
+.logoImg {
+  height: 31px;
+  width: auto;
+  display: block;
 }
 
 .navPhone {
@@ -66,7 +58,7 @@
 /* Hero */
 .hero {
   background: #0a3f52;
-  padding: 56px 24px;
+  padding: 32px 24px;
 }
 
 .heroInner {
@@ -84,12 +76,13 @@
 }
 
 .heroTitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 36px;
-  font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
   color: #fff;
-  line-height: 1.15;
-  margin-bottom: 14px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
 }
 
 .heroSubtitle {
@@ -248,7 +241,7 @@
   }
 
   .hero {
-    padding: 40px 20px;
+    padding: 24px 20px;
   }
 
   .main {

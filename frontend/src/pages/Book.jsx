@@ -47,8 +47,8 @@ export default function Book() {
         transition={{ duration: 0.4 }}
       >
         <div className={styles.navInner}>
-          <a href="https://www.active.cruises" target="_blank" rel="noreferrer" className={styles.navLogo}>
-            ACTIVE <span className={styles.navLogoCruises}>CRUISES</span>
+          <a href="https://www.active.cruises" target="_blank" rel="noreferrer">
+            <img src="/logo.webp" alt="Active Cruises" className={styles.logoImg} />
           </a>
           <a
             href="https://wa.me/38641277306"
@@ -71,19 +71,11 @@ export default function Book() {
       {/* Hero */}
       <div className={styles.hero}>
         <div className={styles.heroInner}>
-          <motion.p
-            className={styles.heroEyebrow}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Bareboat charter · Adriatic
-          </motion.p>
           <motion.h1
             className={styles.heroTitle}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5 }}
           >
             Deposit &amp; Payment
           </motion.h1>
@@ -91,9 +83,10 @@ export default function Book() {
             className={styles.heroSubtitle}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            A fully refundable €2,000 hold on your card — released automatically if the boat returns undamaged.
+            As you have a bareboat charter (without our crew), we require a €2,000 refundable
+            deposit hold on your credit card. Here&apos;s exactly what happens:
           </motion.p>
         </div>
       </div>
