@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 import { createClient } from '@supabase/supabase-js'
 import { useMode } from '../context/ModeContext.jsx'
@@ -11,6 +12,15 @@ const supabase = createClient(
 
 const FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`
 const ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+function LockIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+  )
+}
 
 export default function BookingForm() {
   const stripe = useStripe()
@@ -139,8 +149,6 @@ export default function BookingForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h2 className={styles.formTitle}>DEPOSIT PAYMENT DETAILS</h2>
-
       <div className={styles.grid2}>
         <div className={styles.field}>
           <label className={styles.label}>Full Name</label>
@@ -190,17 +198,14 @@ export default function BookingForm() {
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label}>Deposit Amount (€)</label>
-        <input
-          className={styles.input}
-          type="number"
-          name="depositAmount"
-          value={form.depositAmount}
-          onChange={handleChange}
-          required
-          min="1"
-          step="0.01"
-        />
+        <label className={styles.label}>Deposit Amount</label>
+        <div className={styles.depositDisplay}>
+          <span className={styles.depositCurrency}>EUR</span>
+          <span className={styles.depositAmount}>
+            {Number(form.depositAmount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </span>
+        </div>
+        <input type="hidden" name="depositAmount" value={form.depositAmount} readOnly />
       </div>
 
       <div className={styles.field}>
@@ -217,9 +222,9 @@ export default function BookingForm() {
                 style: {
                   base: {
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '16px',
-                    color: '#1a1a2e',
-                    '::placeholder': { color: '#9ca3af' },
+                    fontSize: '14px',
+                    color: '#0f172a',
+                    '::placeholder': { color: '#94a3b8' },
                   },
                 },
               }}
@@ -235,13 +240,21 @@ export default function BookingForm() {
 
       {error && <p className={styles.error}>{error}</p>}
 
-      <button
-        type="submit"
-        className={styles.submitBtn}
-        disabled={loading || !stripe}
-      >
-        {loading ? 'Processing...' : 'Save card & confirm deposit'}
-      </button>
+      <div className={styles.ctaGroup}>
+        <motion.button
+          type="submit"
+          className={styles.submitBtn}
+          disabled={loading || !stripe}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          {loading ? 'Processing...' : 'Save card & confirm deposit'}
+        </motion.button>
+        <div className={styles.secureNote}>
+          <LockIcon />
+          <span>Payments secured by Stripe · Card details never stored</span>
+        </div>
+      </div>
     </form>
   )
 }
