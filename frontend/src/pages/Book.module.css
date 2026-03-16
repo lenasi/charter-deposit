@@ -58,12 +58,13 @@
 /* Hero */
 .hero {
   background: #0a3f52;
-  padding: 32px 24px;
+  padding: 32px 0;
 }
 
 .heroInner {
   max-width: 672px;
   margin: 0 auto;
+  padding: 0 24px;
 }
 
 .heroEyebrow {
@@ -241,7 +242,7 @@
   }
 
   .hero {
-    padding: 24px 20px;
+    padding: 24px 0;
   }
 
   .main {
