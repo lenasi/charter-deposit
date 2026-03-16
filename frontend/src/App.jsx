@@ -23,9 +23,9 @@ export default function App() {
     <ModeProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/book" element={<BookWithStripe />} />
+          <Route path="/" element={<BookWithStripe />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="*" element={<Navigate to="/book" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </ModeProvider>
