@@ -68,29 +68,6 @@ export default function Book() {
         <div className={styles.testBanner}>⚠ TEST MODE — no real charges</div>
       )}
 
-      {/* Hero */}
-      <div className={styles.hero}>
-        <div className={styles.heroInner}>
-          <motion.h1
-            className={styles.heroTitle}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            Deposit &amp; Payment
-          </motion.h1>
-          <motion.p
-            className={styles.heroSubtitle}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            As you have a bareboat charter (without our crew), we require a €2,000 refundable
-            deposit hold on your credit card. Here&apos;s exactly what happens:
-          </motion.p>
-        </div>
-      </div>
-
       {/* Cards */}
       <main className={styles.main}>
         {/* Card 1 — Steps */}
@@ -101,6 +78,25 @@ export default function Book() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          <div className={styles.cardHeader}>
+            <motion.h1
+              className={styles.pageTitle}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              Deposit &amp; Payment
+            </motion.h1>
+            <motion.p
+              className={styles.pageSubtitle}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.08 }}
+            >
+              As you have a bareboat charter (without our crew), we require a €2,000 refundable
+              deposit hold on your credit card. Here&apos;s exactly what happens:
+            </motion.p>
+          </div>
           <p className={styles.cardLabel}>How the deposit works</p>
           <div className={styles.steps}>
             {steps.map((step, i) => (
