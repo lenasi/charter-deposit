@@ -1,4 +1,5 @@
 import postgres from "https://deno.land/x/postgresjs@v3.4.4/mod.js";
+import { sendAdminEmail } from "../_shared/email.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -34,6 +35,21 @@ Deno.serve(async (req) => {
       )
       RETURNING id
     `;
+
+    await sendAdminEmail(
+      `[Charter] New booking — ${clientName}`,
+      `<h2>New booking registered</h2>
+<table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Name</td><td><strong>${clientName}</strong></td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Email</td><td>${email}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Phone</td><td>${phone}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Charter date</td><td>${charterDate}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Deposit</td><td>€${depositAmount}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Mode</td><td>${mode || "live"}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Booking ID</td><td>${row.id}</td></tr>
+</table>
+<p style="color:#888;font-size:12px;margin-top:16px">Card saved. Hold will be placed 2 days before charter date.</p>`
+    );
 
     return new Response(
       JSON.stringify({ success: true, bookingId: row.id }),

@@ -1,5 +1,6 @@
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { sendAdminEmail } from "../_shared/email.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -38,6 +39,7 @@ Deno.serve(async (req) => {
   let bookingsFound = 0;
   let bookingsTriggered = 0;
   const processedIds: string[] = [];
+  const cronErrors: string[] = [];
 
   try {
     const { data: bookings, error: fetchError } = await supabase
@@ -80,6 +82,7 @@ Deno.serve(async (req) => {
         processedIds.push(booking.id);
       } catch (err) {
         console.error(`Failed for booking ${booking.id}:`, err.message);
+        cronErrors.push(`Booking ${booking.id} (${booking.client_name}): ${err.message}`);
       }
     }
 
@@ -90,6 +93,25 @@ Deno.serve(async (req) => {
       details: { mode, processed_ids: processedIds },
       status: "ok",
     });
+
+    const successRows = processedIds.map((id, i) => {
+      const bk = (bookings ?? []).find((b: { id: string }) => b.id === id);
+      return `<tr><td style="padding:3px 12px 3px 0">${bk?.client_name ?? id}</td><td>${bk?.charter_date ?? ""}</td><td>€${bk?.deposit_amount ?? ""}</td></tr>`;
+    }).join("");
+    const errorRows = cronErrors.map(e => `<li style="color:#c0392b">${e}</li>`).join("");
+
+    await sendAdminEmail(
+      `[Charter] Auto-hold cron — ${bookingsTriggered}/${bookingsFound} placed (${mode})`,
+      `<h2>Auto-hold cron completed</h2>
+<table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Mode</td><td>${mode}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Target date</td><td>${targetDateStr}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Bookings found</td><td>${bookingsFound}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Holds placed</td><td><strong>${bookingsTriggered}</strong></td></tr>
+</table>
+${bookingsTriggered > 0 ? `<h3>Processed</h3><table style="font-family:sans-serif;font-size:13px;border-collapse:collapse"><tr><th style="text-align:left;padding:3px 12px 3px 0">Name</th><th style="text-align:left;padding:3px 12px 3px 0">Charter date</th><th style="text-align:left">Deposit</th></tr>${successRows}</table>` : ""}
+${cronErrors.length > 0 ? `<h3 style="color:#c0392b">Errors (${cronErrors.length})</h3><ul>${errorRows}</ul>` : ""}`
+    );
 
     return new Response(
       JSON.stringify({ bookingsFound, bookingsTriggered, processedIds }),
@@ -104,6 +126,17 @@ Deno.serve(async (req) => {
       status: "error",
       error_message: err.message,
     });
+
+    await sendAdminEmail(
+      `[Charter] AUTO-HOLD CRON ERROR (${mode})`,
+      `<h2 style="color:#c0392b">Auto-hold cron failed</h2>
+<p><strong>Error:</strong> ${err.message}</p>
+<table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Mode</td><td>${mode}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Bookings found before error</td><td>${bookingsFound}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Holds placed before error</td><td>${bookingsTriggered}</td></tr>
+</table>`
+    );
 
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,

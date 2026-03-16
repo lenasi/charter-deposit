@@ -42,74 +42,35 @@
   opacity: 0.8;
 }
 
-/* Mode bar */
-.modeBarTest {
+/* Test banner */
+.testBanner {
   background: #fffbeb;
   border-bottom: 1.5px solid #fcd34d;
   padding: 8px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.modeBarLive {
-  background: #f0fdf4;
-  border-bottom: 1.5px solid #bbf7d0;
-  padding: 8px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.modeLabel {
+  text-align: center;
   font-size: 13px;
   font-weight: 600;
-  color: #374151;
-}
-
-.modeBarTest .modeLabel {
   color: #92400e;
 }
 
-.modeBarLive .modeLabel {
-  color: #166534;
-}
-
-.modeToggle {
-  display: flex;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1.5px solid #d1d5db;
-  background: #fff;
-}
-
-.modeBtnActive {
-  padding: 3px 14px;
+/* Test link in header */
+.testLink {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  color: #9ca3af;
+  background: none;
   border: none;
-  background: #0a2342;
-  color: #fff;
   cursor: pointer;
+  padding: 2px 6px;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.15s;
 }
 
-.modeBtnInactive {
-  padding: 3px 14px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  border: none;
-  background: #fff;
-  color: #6b7280;
-  cursor: pointer;
+.testLink:hover {
+  opacity: 1;
 }
 
-.modeBtnInactive:hover {
-  background: #f3f4f6;
-}
 
 /* Main */
 .main {

@@ -44,6 +44,12 @@ export default function Book() {
           <a href="https://www.active.cruises" target="_blank" rel="noreferrer">
             <img src="/logo.webp" alt="Active Cruises" className={styles.logoImg} />
           </a>
+          <button
+            className={styles.testLink}
+            onClick={() => setMode(mode === 'test' ? 'live' : 'test')}
+          >
+            {mode === 'test' ? 'Exit test' : 'Test'}
+          </button>
           <a
             href="https://wa.me/38641277306"
             target="_blank"
@@ -57,26 +63,11 @@ export default function Book() {
         </div>
       </header>
 
-      {/* Mode bar */}
-      <div className={mode === 'test' ? styles.modeBarTest : styles.modeBarLive}>
-        <span className={styles.modeLabel}>
-          {mode === 'test' ? '⚠ TEST MODE — no real charges' : '● Live mode'}
-        </span>
-        <div className={styles.modeToggle}>
-          <button
-            className={mode === 'test' ? styles.modeBtnActive : styles.modeBtnInactive}
-            onClick={() => setMode('test')}
-          >
-            Test
-          </button>
-          <button
-            className={mode === 'live' ? styles.modeBtnActive : styles.modeBtnInactive}
-            onClick={() => setMode('live')}
-          >
-            Live
-          </button>
+      {mode === 'test' && (
+        <div className={styles.testBanner}>
+          ⚠ TEST MODE — no real charges
         </div>
-      </div>
+      )}
 
       <main className={styles.main}>
         {/* Section 1 — Deposit explanation */}
