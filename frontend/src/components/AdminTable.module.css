@@ -1,0 +1,156 @@
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  background: #f8f8f8;
+  color: #0a2342;
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1.5px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.rowDanger {
+  background: #fff5f5 !important;
+}
+
+.nameCell {
+  font-weight: 600;
+  color: #0a2342 !important;
+  white-space: nowrap;
+}
+
+.empty {
+  text-align: center;
+  color: #9ca3af;
+  padding: 32px !important;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge_card_saved {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.badge_hold_active {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.badge_captured {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.badge_voided {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.expiryWarn {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.holdSched {
+  color: #374151;
+}
+
+.holdSchedWarn {
+  color: #b45309;
+  font-weight: 600;
+}
+
+.holdSchedNote {
+  font-size: 12px;
+  font-weight: 400;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btnPlace {
+  background: #0a2342;
+  color: #fff;
+}
+
+.btnCapture {
+  background: #16a34a;
+  color: #fff;
+}
+
+.btnVoid {
+  background: #dc2626;
+  color: #fff;
+}
+
+.btnDelete {
+  background: #fff;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}

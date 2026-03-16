@@ -1,0 +1,506 @@
+/* Login */
+.loginWrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+}
+
+.loginBox {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.loginTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0a2342;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.loginInput {
+  padding: 11px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+}
+
+.loginInput:focus {
+  border-color: #0a2342;
+}
+
+.loginError {
+  color: #dc2626;
+  font-size: 14px;
+}
+
+.loginModeRow {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid #d1d5db;
+}
+
+.loginModeBtn {
+  flex: 1;
+  padding: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  background: #f3f4f6;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.loginModeBtnActive {
+  flex: 1;
+  padding: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  background: #d97706;
+  color: #fff;
+  cursor: pointer;
+}
+
+.loginModeBtnActiveLive {
+  flex: 1;
+  padding: 9px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  background: #16a34a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.loginModeHint {
+  font-size: 12px;
+  color: #92400e;
+  text-align: center;
+  margin: -6px 0;
+}
+
+.loginModeHintLive {
+  color: #166534;
+}
+
+.loginBtn {
+  padding: 12px;
+  background: #0a2342;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  background: #0d2d56;
+}
+
+/* Page */
+.page {
+  min-height: 100vh;
+  background: #f8f8f8;
+}
+
+.header {
+  background: #0a2342;
+}
+
+.headerInner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modeToggle {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255,255,255,0.3);
+}
+
+.modeTestActive {
+  padding: 5px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  background: #d97706;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modeTestInactive {
+  padding: 5px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+}
+
+.modeTestInactive:hover {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.modeLiveActive {
+  padding: 5px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  background: #16a34a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modeLiveInactive {
+  padding: 5px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+}
+
+.modeLiveInactive:hover {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.modeBarTest {
+  background: #fffbeb;
+  border-bottom: 1.5px solid #fcd34d;
+  padding: 7px 24px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.modeBarLive {
+  background: #f0fdf4;
+  border-bottom: 1.5px solid #bbf7d0;
+  padding: 7px 24px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #166534;
+}
+
+.logoutBtn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0;
+}
+
+.tab {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  border-radius: 4px 4px 0 0;
+  transition: color 0.15s;
+}
+
+.tab:hover {
+  color: #0a2342;
+}
+
+.tabActive {
+  color: #0a2342;
+  border-bottom-color: #0a2342;
+}
+
+.tabHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.tabTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0a2342;
+}
+
+.refreshBtn {
+  padding: 7px 16px;
+  background: #0a2342;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.refreshBtn:hover {
+  background: #0d2d56;
+}
+
+.loading {
+  color: #9ca3af;
+  font-size: 15px;
+}
+
+/* Cron section */
+.cronSection {
+  max-width: 600px;
+}
+
+.cronCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.cronRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.cronRow:last-child {
+  border-bottom: none;
+}
+
+.cronLabel {
+  min-width: 220px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.cronValue {
+  font-size: 14px;
+  color: #0a2342;
+  font-weight: 500;
+}
+
+.cronHint {
+  font-size: 12px;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.runNowBtn {
+  padding: 10px 24px;
+  background: #0a2342;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.runNowBtn:hover:not(:disabled) {
+  background: #0d2d56;
+}
+
+.runNowBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cronResultOk {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #166534;
+}
+
+.cronResultError {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #dc2626;
+}
+
+/* Logs table */
+.tableWrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  background: #f8f8f8;
+  color: #0a2342;
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1.5px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.empty {
+  text-align: center;
+  color: #9ca3af;
+  padding: 32px !important;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badgeOk {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.badgeError {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.detailsBtn {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.detailsBtn:hover {
+  background: #e5e7eb;
+}
+
+.detailsRow td {
+  background: #fafafa;
+}
+
+.idList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.idList li {
+  background: #e5e7eb;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-family: monospace;
+  color: #374151;
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 20px 16px;
+  }
+}

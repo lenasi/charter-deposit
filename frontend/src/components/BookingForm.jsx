@@ -1,0 +1,247 @@
+import { useState, useEffect } from 'react'
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
+import { createClient } from '@supabase/supabase-js'
+import { useMode } from '../context/ModeContext.jsx'
+import styles from './BookingForm.module.css'
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co',
+  import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder'
+)
+
+const FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1`
+const ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY
+
+export default function BookingForm() {
+  const stripe = useStripe()
+  const elements = useElements()
+  const { mode } = useMode()
+
+  const [form, setForm] = useState({
+    clientName: '',
+    email: '',
+    phone: '',
+    charterDate: '',
+    depositAmount: '2000',
+    notes: '',
+  })
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState(false)
+
+  useEffect(() => {
+    if (mode === 'test') {
+      const testDate = new Date()
+      testDate.setDate(testDate.getDate() + 30)
+      const yyyy = testDate.getFullYear()
+      const mm = String(testDate.getMonth() + 1).padStart(2, '0')
+      const dd = String(testDate.getDate()).padStart(2, '0')
+      setForm({
+        clientName: 'Test User',
+        email: 'test@example.com',
+        phone: '+385 91 234 5678',
+        charterDate: `${yyyy}-${mm}-${dd}`,
+        depositAmount: '100',
+        notes: '',
+      })
+    }
+  }, [mode])
+
+  const handleChange = (e) => {
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setError('')
+
+    if (!stripe) return
+    if (mode !== 'test' && !elements) return
+
+    setLoading(true)
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${ANON_KEY}`,
+      'apikey': ANON_KEY,
+    }
+
+    try {
+      // 1. Create SetupIntent + Stripe Customer
+      const res = await fetch(`${FUNCTIONS_URL}/create-setup-intent`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({ email: form.email, name: form.clientName, mode }),
+      })
+      const { clientSecret, customerId, error: fnError } = await res.json()
+      if (fnError) throw new Error(fnError)
+
+      let paymentMethodId
+
+      if (mode === 'test') {
+        // In test mode: skip confirmCardSetup — pm_card_visa is a valid Stripe test PM
+        paymentMethodId = 'pm_card_visa'
+      } else {
+        // 2. Confirm SetupIntent with real card element
+        const { setupIntent, error: stripeError } = await stripe.confirmCardSetup(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+            billing_details: {
+              name: form.clientName,
+              email: form.email,
+              phone: form.phone,
+            },
+          },
+        })
+        if (stripeError) throw new Error(stripeError.message)
+        paymentMethodId = setupIntent.payment_method
+      }
+
+      // 3. Save booking
+      const saveRes = await fetch(`${FUNCTIONS_URL}/save-booking`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          clientName: form.clientName,
+          email: form.email,
+          phone: form.phone,
+          charterDate: form.charterDate,
+          depositAmount: form.depositAmount,
+          stripeCustomerId: customerId,
+          stripePaymentMethodId: paymentMethodId,
+          mode,
+          notes: form.notes || null,
+        }),
+      })
+      const { error: saveError } = await saveRes.json()
+      if (saveError) throw new Error(saveError)
+
+      setSuccess(true)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (success) {
+    return (
+      <div className={styles.successBox}>
+        <div className={styles.successIcon}>✓</div>
+        <h3 className={styles.successTitle}>Deposit Confirmed</h3>
+        <p className={styles.successMsg}>
+          Your deposit details are confirmed and your card has been saved. A hold of €2,000 will be placed a
+          few days before your charter date. Please make sure you have at least €2,000 available on your card at that time. Thank you and enjoy your cruise!
+        </p>
+      </div>
+    )
+  }
+
+  return (
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h2 className={styles.formTitle}>DEPOSIT PAYMENT DETAILS</h2>
+
+      <div className={styles.grid2}>
+        <div className={styles.field}>
+          <label className={styles.label}>Full Name</label>
+          <input
+            className={styles.input}
+            name="clientName"
+            value={form.clientName}
+            onChange={handleChange}
+            required
+            placeholder="John Smith"
+          />
+        </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Email</label>
+          <input
+            className={styles.input}
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            placeholder="john@example.com"
+          />
+        </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Phone</label>
+          <input
+            className={styles.input}
+            name="phone"
+            value={form.phone}
+            onChange={handleChange}
+            required
+            placeholder="+385 91 234 5678"
+          />
+        </div>
+        <div className={styles.field}>
+          <label className={styles.label}>Charter Date</label>
+          <input
+            className={styles.input}
+            type="date"
+            name="charterDate"
+            value={form.charterDate}
+            onChange={handleChange}
+            required
+          />
+        </div>
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label}>Deposit Amount (€)</label>
+        <input
+          className={styles.input}
+          type="number"
+          name="depositAmount"
+          value={form.depositAmount}
+          onChange={handleChange}
+          required
+          min="1"
+          step="0.01"
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label}>Card Details</label>
+        {mode === 'test' ? (
+          <div className={styles.testCardFilled}>
+            <span className={styles.testCardIcon}>💳</span>
+            <span>Visa <strong>4242 4242 4242 4242</strong> · 12/26 · 123 — test card autofilled</span>
+          </div>
+        ) : (
+          <div className={styles.cardElement}>
+            <CardElement
+              options={{
+                style: {
+                  base: {
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '16px',
+                    color: '#1a1a2e',
+                    '::placeholder': { color: '#9ca3af' },
+                  },
+                },
+              }}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className={styles.fundsNotice}>
+        <span className={styles.fundsNoticeIcon}>💳</span>
+        <span>Please ensure you have at least <strong>€2,000</strong> available on your credit card before proceeding.</span>
+      </div>
+
+      {error && <p className={styles.error}>{error}</p>}
+
+      <button
+        type="submit"
+        className={styles.submitBtn}
+        disabled={loading || !stripe}
+      >
+        {loading ? 'Processing...' : 'Save card & confirm deposit'}
+      </button>
+    </form>
+  )
+}

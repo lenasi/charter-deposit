@@ -1,0 +1,174 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0a2342;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input {
+  padding: 11px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: #1a1a2e;
+  outline: none;
+  transition: border-color 0.15s;
+  background: #fff;
+  width: 100%;
+}
+
+.input:focus {
+  border-color: #0a2342;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.cardElement {
+  padding: 12px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 0.15s;
+}
+
+.cardElement:focus-within {
+  border-color: #0a2342;
+}
+
+.testCardFilled {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border: 1.5px solid #fcd34d;
+  border-radius: 8px;
+  background: #fffbeb;
+  font-size: 14px;
+  color: #92400e;
+}
+
+.testCardIcon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.submitBtn {
+  padding: 14px;
+  background: #0a2342;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  width: 100%;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #0d2d56;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.fundsNotice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #78350f;
+  line-height: 1.5;
+}
+
+.fundsNoticeIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 14px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.successBox {
+  text-align: center;
+  padding: 48px 24px;
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+}
+
+.successIcon {
+  width: 56px;
+  height: 56px;
+  background: #16a34a;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.successTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #14532d;
+  margin-bottom: 12px;
+}
+
+.successMsg {
+  font-size: 15px;
+  color: #166534;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
