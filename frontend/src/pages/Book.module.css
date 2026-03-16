@@ -13,7 +13,7 @@
 }
 
 .navInner {
-  max-width: 672px;
+  max-width: 772px;
   margin: 0 auto;
   padding: 16px 24px;
   display: flex;
@@ -79,7 +79,7 @@
 /* Main */
 .main {
   flex: 1;
-  max-width: 672px;
+  max-width: 772px;
   margin: 0 auto;
   width: 100%;
   padding: 2.5rem 1.5rem;
