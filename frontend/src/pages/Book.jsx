@@ -157,7 +157,7 @@ export default function Book() {
           Active Vacations l.t.d. — Ribnjak Ulica 56, 10000 Zagreb, Croatia — VAT: HR39921718762
         </p>
         <p className={styles.footerWarning}>
-          Never send payments to unknown email addresses or external domains. We exclusively use <strong>active.cruises</strong> — nothing else.
+          Never send payments to unknown email addresses or external domains. We exclusively use <strong>active.cruises</strong> or <strong>revolut.com</strong> domain — nothing else.
         </p>
         <button
           className={styles.testLink}
