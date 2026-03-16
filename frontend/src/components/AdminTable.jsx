@@ -108,8 +108,7 @@ export default function AdminTable({ bookings, onRefresh, mode = 'live' }) {
             <tr>
               <th>Client</th>
               <th>Email</th>
-              <th>Phone</th>
-              <th>Charter Date</th>
+              <th>Check-in Date</th>
               <th>Deposit</th>
               <th>Status</th>
               <th>Hold Scheduled</th>
@@ -120,7 +119,7 @@ export default function AdminTable({ bookings, onRefresh, mode = 'live' }) {
           <tbody>
             {bookings.length === 0 && (
               <tr>
-                <td colSpan={9} className={styles.empty}>No bookings found.</td>
+                <td colSpan={8} className={styles.empty}>No bookings found.</td>
               </tr>
             )}
             {bookings.map((b) => {
@@ -136,7 +135,6 @@ export default function AdminTable({ bookings, onRefresh, mode = 'live' }) {
                 >
                   <td className={styles.nameCell}>{b.client_name}</td>
                   <td>{b.email}</td>
-                  <td>{b.phone}</td>
                   <td>{b.charter_date}</td>
                   <td>€{Number(b.deposit_amount).toLocaleString()}</td>
                   <td>

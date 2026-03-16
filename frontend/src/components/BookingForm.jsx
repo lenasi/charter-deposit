@@ -30,7 +30,6 @@ export default function BookingForm() {
   const [form, setForm] = useState({
     clientName: '',
     email: '',
-    phone: '',
     charterDate: '',
     depositAmount: '2000',
     notes: '',
@@ -49,7 +48,7 @@ export default function BookingForm() {
       setForm({
         clientName: 'Test User',
         email: 'test@example.com',
-        phone: '+385 91 234 5678',
+
         charterDate: `${yyyy}-${mm}-${dd}`,
         depositAmount: '100',
         notes: '',
@@ -99,7 +98,6 @@ export default function BookingForm() {
             billing_details: {
               name: form.clientName,
               email: form.email,
-              phone: form.phone,
             },
           },
         })
@@ -114,7 +112,6 @@ export default function BookingForm() {
         body: JSON.stringify({
           clientName: form.clientName,
           email: form.email,
-          phone: form.phone,
           charterDate: form.charterDate,
           depositAmount: form.depositAmount,
           stripeCustomerId: customerId,
@@ -141,7 +138,7 @@ export default function BookingForm() {
         <h3 className={styles.successTitle}>Deposit Confirmed</h3>
         <p className={styles.successMsg}>
           Your deposit details are confirmed and your card has been saved. A hold of €2,000 will be placed a
-          few days before your charter date. Please make sure you have at least €2,000 available on your card at that time. Thank you and enjoy your cruise!
+          few days before your check-in date. Please make sure you have at least €2,000 available on your card at that time. Thank you and enjoy your cruise!
         </p>
       </div>
     )
@@ -174,18 +171,7 @@ export default function BookingForm() {
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>Phone</label>
-          <input
-            className={styles.input}
-            name="phone"
-            value={form.phone}
-            onChange={handleChange}
-            required
-            placeholder="+385 91 234 5678"
-          />
-        </div>
-        <div className={styles.field}>
-          <label className={styles.label}>Charter Date</label>
+          <label className={styles.label}>Check-in Date</label>
           <input
             className={styles.input}
             type="date"

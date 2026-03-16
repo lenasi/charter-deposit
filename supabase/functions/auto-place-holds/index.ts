@@ -109,7 +109,7 @@ Deno.serve(async (req) => {
   <tr><td style="padding:4px 12px 4px 0;color:#666">Bookings found</td><td>${bookingsFound}</td></tr>
   <tr><td style="padding:4px 12px 4px 0;color:#666">Holds placed</td><td><strong>${bookingsTriggered}</strong></td></tr>
 </table>
-${bookingsTriggered > 0 ? `<h3>Processed</h3><table style="font-family:sans-serif;font-size:13px;border-collapse:collapse"><tr><th style="text-align:left;padding:3px 12px 3px 0">Name</th><th style="text-align:left;padding:3px 12px 3px 0">Charter date</th><th style="text-align:left">Deposit</th></tr>${successRows}</table>` : ""}
+${bookingsTriggered > 0 ? `<h3>Processed</h3><table style="font-family:sans-serif;font-size:13px;border-collapse:collapse"><tr><th style="text-align:left;padding:3px 12px 3px 0">Name</th><th style="text-align:left;padding:3px 12px 3px 0">Check-in date</th><th style="text-align:left">Deposit</th></tr>${successRows}</table>` : ""}
 ${cronErrors.length > 0 ? `<h3 style="color:#c0392b">Errors (${cronErrors.length})</h3><ul>${errorRows}</ul>` : ""}`
     );
 

@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
 
     try {
       const [bk] = await sql`
-        SELECT client_name, email, phone, charter_date, deposit_amount
+        SELECT client_name, email, charter_date, deposit_amount
         FROM charter.bookings WHERE id = ${bookingId}
       `;
       await sendAdminEmail(
@@ -41,8 +41,7 @@ Deno.serve(async (req) => {
 <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
   <tr><td style="padding:4px 12px 4px 0;color:#666">Name</td><td><strong>${bk.client_name}</strong></td></tr>
   <tr><td style="padding:4px 12px 4px 0;color:#666">Email</td><td>${bk.email}</td></tr>
-  <tr><td style="padding:4px 12px 4px 0;color:#666">Phone</td><td>${bk.phone}</td></tr>
-  <tr><td style="padding:4px 12px 4px 0;color:#666">Charter date</td><td>${bk.charter_date}</td></tr>
+  <tr><td style="padding:4px 12px 4px 0;color:#666">Check-in date</td><td>${bk.charter_date}</td></tr>
   <tr><td style="padding:4px 12px 4px 0;color:#666">Deposit released</td><td>€${bk.deposit_amount}</td></tr>
   <tr><td style="padding:4px 12px 4px 0;color:#666">Mode</td><td>${mode}</td></tr>
   <tr><td style="padding:4px 12px 4px 0;color:#666">Payment Intent</td><td>${paymentIntentId}</td></tr>
