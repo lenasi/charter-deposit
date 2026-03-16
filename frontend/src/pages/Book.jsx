@@ -44,12 +44,6 @@ export default function Book() {
           <a href="https://www.active.cruises" target="_blank" rel="noreferrer">
             <img src="/logo.webp" alt="Active Cruises" className={styles.logoImg} />
           </a>
-          <button
-            className={styles.testLink}
-            onClick={() => setMode(mode === 'test' ? 'live' : 'test')}
-          >
-            {mode === 'test' ? 'Exit test' : 'Test'}
-          </button>
           <a
             href="https://wa.me/38641277306"
             target="_blank"
@@ -129,6 +123,12 @@ export default function Book() {
         <p className={styles.footerCompany}>
           Active Vacations l.t.d. — Ribnjak Ulica 56, 10000 Zagreb, Croatia — VAT: HR39921718762
         </p>
+        <button
+          className={styles.testLink}
+          onClick={() => setMode(mode === 'test' ? 'live' : 'test')}
+        >
+          {mode === 'test' ? 'Exit test' : 'Test'}
+        </button>
       </footer>
     </div>
   )
