@@ -181,17 +181,16 @@ export default function BookingForm() {
             required
           />
         </div>
-      </div>
-
-      <div className={styles.field}>
-        <label className={styles.label}>Deposit Amount</label>
-        <div className={styles.depositDisplay}>
-          <span className={styles.depositCurrency}>EUR</span>
-          <span className={styles.depositAmount}>
-            {Number(form.depositAmount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </span>
+        <div className={styles.field}>
+          <label className={styles.label}>Deposit Amount</label>
+          <div className={styles.depositDisplay}>
+            <span className={styles.depositCurrency}>EUR</span>
+            <span className={styles.depositAmount}>
+              {Number(form.depositAmount).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </span>
+          </div>
+          <input type="hidden" name="depositAmount" value={form.depositAmount} readOnly />
         </div>
-        <input type="hidden" name="depositAmount" value={form.depositAmount} readOnly />
       </div>
 
       <div className={styles.field}>
