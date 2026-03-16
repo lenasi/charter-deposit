@@ -110,7 +110,7 @@ export default function Book() {
           🔒 Payments secured by Stripe. Your card details are never stored on our servers.
         </p>
         <div className={styles.footerLinks}>
-          <a href="#" className={styles.footerLink}>Charter Terms &amp; Conditions</a>
+          <a href="https://inoffice.box.com/v/crewedcharter" target="_blank" rel="noreferrer" className={styles.footerLink}>Charter Terms &amp; Conditions</a>
           <a
             href="https://wa.me/38641277306"
             target="_blank"
